@@ -35,6 +35,40 @@ public class Trader<T> {
         this.money = money;
     }
 
+    /**
+     * Construct a Trader with the given money and empty inventory and wishlist.
+     *
+     * @param money The Trader's money
+     */
+    public Trader(int money) {
+        this(new ArrayList<>(), new ArrayList<>(), money);
+    }
+
+    /**
+     * Add an object of type T to this Trader's wishlist.
+     *
+     * @param item The item to add to the wishlist
+     */
+    public void addToWishlist(T item) {
+        wishlist.add(item);
+    }
+
+    /**
+     * Get the selling price of an object of type T.
+     * If the object is Tradable, return its price (via getPrice()).
+     * If not, return Tradable.MISSING_PRICE.
+     *
+     * @param item The item to get the selling price for
+     * @return The selling price if Tradable, otherwise Tradable.MISSING_PRICE
+     */
+    public int getSellingPrice(T item) {
+        if (item instanceof Tradable) {
+            return ((Tradable) item).getPrice();
+        }
+        return Tradable.MISSING_PRICE;
+    }
+
+
     /* TODO: Add a new constructor that takes a single argument
      *       representing the Trader's money. Give the Trader
      *       empty ArrayLists for their inventory and wishlist.
